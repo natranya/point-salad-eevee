@@ -1,5 +1,10 @@
 import React from "react";
+import styled from "styled-components";
 
 export default function OpponentDeck() {
-  return <div>OpponentDeck</div>;
+  return <OpponentDeckContainer>OpponentDeck</OpponentDeckContainer>;
 }
+
+const OpponentDeckContainer = styled.div`
+  background-color: blue;
+`;

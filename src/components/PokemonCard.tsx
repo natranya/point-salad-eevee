@@ -1,5 +1,10 @@
 import React from "react";
+import { Card } from "./Card";
 
 export default function PokemonCard() {
-  return <div>PokemonCard</div>;
+  return (
+    <>
+      <Card></Card>
+    </>
+  );
 }
