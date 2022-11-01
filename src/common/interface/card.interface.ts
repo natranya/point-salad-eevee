@@ -1,15 +1,19 @@
+import { IDeck } from "./deck.interface";
+
 export type TCardSide = "POINT_SIDE" | "POKEMON_SIDE";
 
-export type TPokemon =
+export type TPokemonExceptEevee =
   | "FLAREON"
   | "JOLTEON"
   | "VAPOREON"
   | "ESPEON"
   | "UMBREON"
-  | "SYLVEON"
-  | "EEVEE";
+  | "SYLVEON";
+
+export type TPokemon = TPokemonExceptEevee | "EEVEE";
 
 export interface IPokemonSide {
+  key: TPokemon;
   name: string;
   pokemonSideImage: string;
 }
@@ -20,7 +24,7 @@ export type TPokemonSideData = {
 
 export interface IPointSide {
   pointSideImage: string;
-  calculatePoint: () => number;
+  calculatePoint: (myDeck: IDeck, otherDeck?: IDeck[]) => void;
   currentPoint?: number;
 }
 

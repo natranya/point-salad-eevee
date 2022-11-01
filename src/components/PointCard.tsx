@@ -1,11 +1,14 @@
 import React from "react";
-import styled from "styled-components";
+import { ICard } from "../common/interface/card.interface";
 import { Card } from "./Card";
 
-export default function PointCard() {
+interface Props {
+  card: ICard;
+}
+export default function PointCard({ card }: Props) {
   return (
     <>
-      <Card></Card>
+      <Card cardImage={card.pointSide.pointSideImage}></Card>
     </>
   );
 }

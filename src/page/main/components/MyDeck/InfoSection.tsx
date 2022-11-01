@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function InfoSection() {
+interface Props {
+  selectCard: () => void;
+}
+
+export default function InfoSection({ selectCard }: Props) {
   return (
     <InfoSectionContainer>
       <Point>POINT</Point>
-      <ActionButton>선택 완료</ActionButton>
+      <ActionButton onClick={selectCard}>선택 완료</ActionButton>
     </InfoSectionContainer>
   );
 }

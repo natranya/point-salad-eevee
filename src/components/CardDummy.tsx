@@ -1,21 +1,50 @@
 import React from "react";
 import styled from "styled-components";
+import { ICard, TCardSide } from "../common/interface/card.interface";
 import { Card } from "./Card";
 import CardCount from "./CardCount";
 
-export default function CardDummy() {
+interface Props {
+  cards: ICard[];
+  cardSide: TCardSide;
+  clickCardDummy?: () => void;
+  cardSelected?: boolean;
+}
+export default function CardDummy({
+  cards,
+  cardSide,
+  clickCardDummy,
+  cardSelected,
+}: Props) {
   return (
-    <CardDummyContainer>
+    <CardDummyContainer
+      onClick={() => {
+        if (clickCardDummy) {
+          clickCardDummy();
+        }
+      }}
+    >
       <Cards>
-        {[1, 2, 3, 4, 5, 6].map((item, index) => {
-          return (
-            <CardWrapperForDummy key={item} order={index}>
-              <Card></Card>
-            </CardWrapperForDummy>
-          );
-        })}
+        {cards &&
+          cards.map((card, index) => {
+            return (
+              <CardWrapperForDummy key={index} order={index}>
+                {cardSide === "POINT_SIDE" && (
+                  <Card
+                    cardImage={card.pointSide.pointSideImage}
+                    cardSelected={cardSelected}
+                  ></Card>
+                )}
+                {cardSide === "POKEMON_SIDE" && (
+                  <Card
+                    cardImage={card.pokemonSide.pokemonSideImage}
+                    cardSelected={cardSelected}
+                  ></Card>
+                )}
+              </CardWrapperForDummy>
+            );
+          })}
       </Cards>
-      <CardCount></CardCount>
     </CardDummyContainer>
   );
 }

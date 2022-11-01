@@ -1,19 +1,32 @@
 import React from "react";
 import styled from "styled-components";
+import { TPokemonExceptEevee } from "../../../../common/interface/card.interface";
+import { TDeckPokemonSide } from "../../../../common/interface/deck.interface";
+import { BlankCard } from "../../../../components/BlankCard";
 import CardCount from "../../../../components/CardCount";
 import PokemonCardDummy from "./PokemonCardDummy";
 
-export default function PokemonCardSection() {
+interface Props {
+  pokemonSide: TDeckPokemonSide;
+}
+export default function PokemonCardSection({ pokemonSide }: Props) {
   return (
     <PokemonCardSectionContainer>
-      {[1, 2, 3, 4, 5, 6].map((cardDummy) => {
-        return (
-          <PokemonCardDummyWrapper>
-            <PokemonCardDummy></PokemonCardDummy>
-            <CardCount></CardCount>
-          </PokemonCardDummyWrapper>
-        );
-      })}
+      {pokemonSide &&
+        (Object.keys(pokemonSide) as TPokemonExceptEevee[]).map((tPokemon) => {
+          return pokemonSide[tPokemon] && pokemonSide[tPokemon].length !== 0 ? (
+            <PokemonCardDummyWrapper>
+              <PokemonCardDummy
+                cards={pokemonSide[tPokemon]}
+              ></PokemonCardDummy>
+              <CardCount
+                count={pokemonSide[tPokemon] ? pokemonSide[tPokemon].length : 0}
+              ></CardCount>
+            </PokemonCardDummyWrapper>
+          ) : (
+            <BlankCard></BlankCard>
+          );
+        })}
     </PokemonCardSectionContainer>
   );
 }

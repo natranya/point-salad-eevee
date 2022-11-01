@@ -1,16 +1,39 @@
 import React from "react";
 import styled from "styled-components";
+import { ICard, TCardSide } from "../../../../common/interface/card.interface";
+import { BlankCard } from "../../../../components/BlankCard";
 import PokemonCard from "../../../../components/PokemonCard";
 
-export default function PokemonCardList() {
+interface Props {
+  pokemonCards: (ICard | null)[];
+  clickBoardCard: (selectedSide: TCardSide, index: number) => void;
+  selectedPokemonCardIndexs: number[];
+}
+
+export default function PokemonCardList({
+  pokemonCards,
+  clickBoardCard,
+  selectedPokemonCardIndexs,
+}: Props) {
+  const clickBoardPokemonCard = (index: number) => {
+    clickBoardCard("POKEMON_SIDE", index);
+  };
   return (
     <PokemonCardListContainer>
-      <PokemonCard></PokemonCard>
-      <PokemonCard></PokemonCard>
-      <PokemonCard></PokemonCard>
-      <PokemonCard></PokemonCard>
-      <PokemonCard></PokemonCard>
-      <PokemonCard></PokemonCard>
+      {pokemonCards &&
+        pokemonCards.map((card, index) => {
+          return card ? (
+            <PokemonCard
+              card={card}
+              clickBoardPokemonCard={() => {
+                clickBoardPokemonCard(index);
+              }}
+              cardSelected={selectedPokemonCardIndexs.includes(index)}
+            ></PokemonCard>
+          ) : (
+            <BlankCard></BlankCard>
+          );
+        })}
     </PokemonCardListContainer>
   );
 }

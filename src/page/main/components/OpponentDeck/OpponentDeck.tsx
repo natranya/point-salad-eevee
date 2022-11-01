@@ -6,5 +6,5 @@ export default function OpponentDeck() {
 }
 
 const OpponentDeckContainer = styled.div`
-  background-color: blue;
+  background-color: #ffebcd;
 `;

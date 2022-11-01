@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 interface Props {
-  count: number;
+  point: number;
 }
-export default function CardCount({ count }: Props) {
-  return <CardCountContainer>{count}</CardCountContainer>;
+export default function CardPoint({ point }: Props) {
+  return <CardPointContainer>{point}</CardPointContainer>;
 }
 
-const CardCountContainer = styled.div`
+const CardPointContainer = styled.div`
   position: absolute;
   top: 0px;
   width: 32px;
@@ -16,7 +16,7 @@ const CardCountContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #9c77d6;
+  background-color: #c968a3;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   border-radius: 50%;
   color: white;

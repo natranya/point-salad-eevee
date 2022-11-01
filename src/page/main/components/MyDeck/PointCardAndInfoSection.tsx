@@ -1,13 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { ICard } from "../../../../common/interface/card.interface";
 import InfoSection from "./InfoSection";
 import PointCardList from "./PointCardList";
 
-export default function PointCardAndInfoSection() {
+interface Props {
+  pointSideCards: ICard[];
+  selectCard: () => void;
+}
+
+export default function PointCardAndInfoSection({
+  pointSideCards,
+  selectCard,
+}: Props) {
   return (
     <PointCardAndInfoSectionContainer>
-      <PointCardList></PointCardList>
-      <InfoSection></InfoSection>
+      <PointCardList cards={pointSideCards}></PointCardList>
+      <InfoSection selectCard={selectCard}></InfoSection>
     </PointCardAndInfoSectionContainer>
   );
 }

@@ -1,10 +1,27 @@
 import React from "react";
+import { ICard } from "../common/interface/card.interface";
 import { Card } from "./Card";
 
-export default function PokemonCard() {
+interface Props {
+  card: ICard;
+  clickBoardPokemonCard: () => void;
+  cardSelected: boolean;
+}
+export default function PokemonCard({
+  card,
+  clickBoardPokemonCard,
+  cardSelected,
+}: Props) {
+  const clickHandler = () => {
+    clickBoardPokemonCard();
+  };
   return (
     <>
-      <Card></Card>
+      <Card
+        cardImage={card.pokemonSide.pokemonSideImage}
+        clickHandler={clickHandler}
+        cardSelected={cardSelected}
+      ></Card>
     </>
   );
 }

@@ -2,8 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import MyDeck from "./MyDeck/MyDeck";
 import OpponentDeck from "./OpponentDeck/OpponentDeck";
+import { IDeck } from "../../../common/interface/deck.interface";
 
-export default function OpponentDeckAndMyDeckSection() {
+interface Props {
+  userDeck: IDeck;
+  selectCard: () => void;
+}
+
+export default function OpponentDeckAndMyDeckSection({
+  userDeck,
+  selectCard,
+}: Props) {
   return (
     <OpponentDeckAndMyDeckSectionContainer>
       <OpponentDeck></OpponentDeck>
@@ -11,7 +20,7 @@ export default function OpponentDeckAndMyDeckSection() {
       <OpponentDeck></OpponentDeck>
       <OpponentDeck></OpponentDeck>
       <MyDeckContainer>
-        <MyDeck></MyDeck>
+        <MyDeck deck={userDeck} selectCard={selectCard}></MyDeck>
       </MyDeckContainer>
     </OpponentDeckAndMyDeckSectionContainer>
   );

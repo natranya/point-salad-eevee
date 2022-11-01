@@ -1,12 +1,29 @@
 import React from "react";
 import styled from "styled-components";
+import {
+  IBoard,
+  ISelectedBoardCardIndex,
+} from "../../../common/interface/board.interface";
+import { TCardSide } from "../../../common/interface/card.interface";
 import Board from "./Board/Board";
-import MyDeck from "./MyDeck/MyDeck";
 
-export default function BoardSection() {
+interface Props {
+  board: IBoard;
+  clickBoardCard: (selectedSide: TCardSide, index: number) => void;
+  selectedBoardCardIndex: ISelectedBoardCardIndex;
+}
+export default function BoardSection({
+  board,
+  clickBoardCard,
+  selectedBoardCardIndex,
+}: Props) {
   return (
     <BoardContainer>
-      <Board></Board>
+      <Board
+        board={board}
+        clickBoardCard={clickBoardCard}
+        selectedBoardCardIndex={selectedBoardCardIndex}
+      ></Board>
     </BoardContainer>
   );
 }
