@@ -34,3 +34,5 @@ export interface ICard {
   pokemonSide: IPokemonSide;
   currentSide: TCardSide;
 }
+
+export interface IBlankCard {}

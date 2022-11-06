@@ -1,5 +1,10 @@
+import { BlankCard } from "../../components/BlankCard";
 import { IBoard, ISelectedBoardCardIndex } from "../interface/board.interface";
-import { TCardSide, TPokemonExceptEevee } from "../interface/card.interface";
+import {
+  ICard,
+  TCardSide,
+  TPokemonExceptEevee,
+} from "../interface/card.interface";
 import { IDeck } from "../interface/deck.interface";
 import { GameUtil } from "./game.util";
 
@@ -136,12 +141,13 @@ const moveSelectedCardToUserDeck = (
     cardDummy.splice(-1, 1);
   } else if (selectedBoardCardIndex.pokemonCardIndexs.length !== 0) {
     selectedBoardCardIndex.pokemonCardIndexs.forEach((cardIndex) => {
-      if (board.pokemonCards[cardIndex] !== null) {
+      if ("cardKey" in board.pokemonCards[cardIndex]) {
         userDeck.pokemonSide[
-          board.pokemonCards[cardIndex]!.pokemonSide.key as TPokemonExceptEevee
-        ].push(board.pokemonCards[cardIndex]!);
+          (board.pokemonCards[cardIndex] as ICard).pokemonSide
+            .key as TPokemonExceptEevee
+        ].push(board.pokemonCards[cardIndex] as ICard);
       }
-      board.pokemonCards[cardIndex] = null;
+      board.pokemonCards[cardIndex] = {} as typeof BlankCard;
     });
   }
   selectedBoardCardIndex.pointCardIndex = null;

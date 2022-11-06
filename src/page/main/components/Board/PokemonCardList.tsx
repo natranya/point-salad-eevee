@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { ICard, TCardSide } from "../../../../common/interface/card.interface";
+import {
+  IBlankCard,
+  ICard,
+  TCardSide,
+} from "../../../../common/interface/card.interface";
 import { BlankCard } from "../../../../components/BlankCard";
 import PokemonCard from "../../../../components/PokemonCard";
 
 interface Props {
-  pokemonCards: (ICard | null)[];
+  pokemonCards: (ICard | IBlankCard)[];
   clickBoardCard: (selectedSide: TCardSide, index: number) => void;
   selectedPokemonCardIndexs: number[];
 }
@@ -22,7 +26,7 @@ export default function PokemonCardList({
     <PokemonCardListContainer>
       {pokemonCards &&
         pokemonCards.map((card, index) => {
-          return card ? (
+          return "cardKey" in card ? (
             <PokemonCard
               card={card}
               clickBoardPokemonCard={() => {
