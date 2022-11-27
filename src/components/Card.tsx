@@ -22,7 +22,7 @@ export const CardLayout = styled.div<{
 }>`
   background: url("${(props) => props.backgroundImage}");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   width: ${(props) => props.theme.card.width};
   height: ${(props) => props.theme.card.height};
   border-radius: ${(props) => props.theme.card.borderRadius};
