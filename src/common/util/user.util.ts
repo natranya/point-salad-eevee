@@ -62,8 +62,7 @@ export const UserUtil = {
     };
     moveSelectedCardToUserDeck(_board, _userDeck, _selectedCardIndex);
     calculatePoint(_userDeck);
-    const _filledBoard = GameUtil.fillEmptyPokemonCardOnBoard(_board);
-    return [_filledBoard, _userDeck, _selectedCardIndex];
+    return [_board, _userDeck, _selectedCardIndex];
   },
 };
 

@@ -16,7 +16,10 @@ export default function PointCardAndInfoSection({
   return (
     <PointCardAndInfoSectionContainer>
       <PointCardList cards={pointSideCards}></PointCardList>
-      <InfoSection selectCard={selectCard}></InfoSection>
+      <InfoSection
+        pointSideCards={pointSideCards}
+        selectCard={selectCard}
+      ></InfoSection>
     </PointCardAndInfoSectionContainer>
   );
 }
