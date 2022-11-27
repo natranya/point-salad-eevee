@@ -56,9 +56,13 @@ export default function Main() {
     if (UserUtil.checkCardSelectAvailable(selectedBoardCardIndex)) {
       const [newBoard, newUserDeck, newSelectedBoardCardIndex] =
         UserUtil.selectCard(board, userDeck, selectedBoardCardIndex);
-      const filledBoard = GameUtil.fillEmptyPokemonCardOnBoard(newBoard);
+      const pokemonCardFilledBoard =
+        GameUtil.fillEmptyPokemonCardOnBoard(newBoard);
+      const pointCardFilledBoard = GameUtil.fillEmptyPointDummyFromOtherDummy(
+        pokemonCardFilledBoard
+      );
       setSelectedBoardCardIndex({ ...newSelectedBoardCardIndex });
-      setBoard({ ...filledBoard });
+      setBoard({ ...pointCardFilledBoard });
       setUserDeck({ ...newUserDeck });
     }
   };

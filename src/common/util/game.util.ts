@@ -70,7 +70,6 @@ export const GameUtil = {
       pointCardDummies: [...board.pointCardDummies.map((item) => [...item])],
       pokemonCards: [...board.pokemonCards],
     };
-    console.log(_board.pokemonCards);
     for (let i = 0; i < 6; i++) {
       if (!_board.pokemonCards[i] || !("cardKey" in _board.pokemonCards[i])) {
         if (checkPointDummy(_board, i % 3)) {
@@ -81,6 +80,18 @@ export const GameUtil = {
             getCardFromDummy(_board, i);
           }
         }
+      }
+    }
+    return _board;
+  },
+  fillEmptyPointDummyFromOtherDummy: (board: IBoard): IBoard => {
+    const _board = {
+      pointCardDummies: [...board.pointCardDummies.map((item) => [...item])],
+      pokemonCards: [...board.pokemonCards],
+    };
+    for (let i = 0; i < 3; i++) {
+      if (!checkPointDummy(_board, i)) {
+        fillDummyFromOtherDummy(_board, i);
       }
     }
     return _board;
