@@ -22,6 +22,7 @@ export default function PointCardSection({
         pointCardDummies.map((pointCardDummy, index) => {
           return (
             <PointCardDummy
+              key={index}
               cards={pointCardDummy}
               clickPointCardDummy={() => {
                 clickPointCardDummy(index);

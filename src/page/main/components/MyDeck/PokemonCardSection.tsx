@@ -13,20 +13,25 @@ export default function PokemonCardSection({ pokemonSide }: Props) {
   return (
     <PokemonCardSectionContainer>
       {pokemonSide &&
-        (Object.keys(pokemonSide) as TPokemonExceptEevee[]).map((tPokemon) => {
-          return pokemonSide[tPokemon] && pokemonSide[tPokemon].length !== 0 ? (
-            <PokemonCardDummyWrapper>
-              <PokemonCardDummy
-                cards={pokemonSide[tPokemon]}
-              ></PokemonCardDummy>
-              <CardCount
-                count={pokemonSide[tPokemon] ? pokemonSide[tPokemon].length : 0}
-              ></CardCount>
-            </PokemonCardDummyWrapper>
-          ) : (
-            <BlankCard></BlankCard>
-          );
-        })}
+        (Object.keys(pokemonSide) as TPokemonExceptEevee[]).map(
+          (tPokemon, index) => {
+            return pokemonSide[tPokemon] &&
+              pokemonSide[tPokemon].length !== 0 ? (
+              <PokemonCardDummyWrapper key={index}>
+                <PokemonCardDummy
+                  cards={pokemonSide[tPokemon]}
+                ></PokemonCardDummy>
+                <CardCount
+                  count={
+                    pokemonSide[tPokemon] ? pokemonSide[tPokemon].length : 0
+                  }
+                ></CardCount>
+              </PokemonCardDummyWrapper>
+            ) : (
+              <BlankCard key={index}></BlankCard>
+            );
+          }
+        )}
     </PokemonCardSectionContainer>
   );
 }

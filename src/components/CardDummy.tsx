@@ -28,7 +28,7 @@ export default function CardDummy({
         {cards &&
           cards.map((card, index) => {
             return (
-              <CardWrapperForDummy key={index} order={index}>
+              <CardWrapperForDummy key={card.cardKey} order={index}>
                 {cardSide === "POINT_SIDE" && (
                   <Card
                     cardImage={card.pointSide.pointSideImage}

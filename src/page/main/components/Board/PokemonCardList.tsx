@@ -29,6 +29,7 @@ export default function PokemonCardList({
           return "cardKey" in card ? (
             <PokemonCard
               card={card}
+              key={card.cardKey}
               clickBoardPokemonCard={() => {
                 clickBoardPokemonCard(index);
               }}
