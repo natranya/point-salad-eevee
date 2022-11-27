@@ -9,6 +9,7 @@ import { IDeck } from "../../common/interface/deck.interface";
 import { GameUtil } from "../../common/util/game.util";
 import { UserUtil } from "../../common/util/user.util";
 import BoardSection from "./components/BoardSection";
+import EeveeModal from "./components/EeveeModal";
 import OpponentDeckAndMyDeckSection from "./components/OpponentDeckAndMyDeckSection";
 
 export default function Main() {
@@ -75,19 +76,22 @@ export default function Main() {
   }, []);
 
   return (
-    <MainContainer>
-      <BoardSection
-        board={board}
-        clickBoardCard={clickBoardCard}
-        selectedBoardCardIndex={selectedBoardCardIndex}
-      ></BoardSection>
-      {userDeck && (
-        <OpponentDeckAndMyDeckSection
-          userDeck={userDeck}
-          selectCard={selectCard}
-        ></OpponentDeckAndMyDeckSection>
-      )}
-    </MainContainer>
+    <>
+      <MainContainer>
+        <BoardSection
+          board={board}
+          clickBoardCard={clickBoardCard}
+          selectedBoardCardIndex={selectedBoardCardIndex}
+        ></BoardSection>
+        {userDeck && (
+          <OpponentDeckAndMyDeckSection
+            userDeck={userDeck}
+            selectCard={selectCard}
+          ></OpponentDeckAndMyDeckSection>
+        )}
+      </MainContainer>
+      <EeveeModal></EeveeModal>
+    </>
   );
 }
 

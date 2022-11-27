@@ -128,29 +128,49 @@ const changeBoardPokemonCardIndex = (
   return selectedBoardCardIndex;
 };
 
+/**
+ *
+ * @param board
+ * @param userDeck
+ * @param selectedBoardCardIndex
+ *
+ * @return isEeveeSelected
+ */
 const moveSelectedCardToUserDeck = (
   board: IBoard,
   userDeck: IDeck,
   selectedBoardCardIndex: ISelectedBoardCardIndex
-) => {
+): boolean => {
+  let isEeveeSelected = false;
   if (selectedBoardCardIndex.pointCardIndex !== null) {
     const cardDummy =
       board.pointCardDummies[selectedBoardCardIndex.pointCardIndex];
-    userDeck.pointSideCards.push(cardDummy[cardDummy.length - 1]);
+    if (cardDummy[cardDummy.length - 1].pokemonSide.key === "EEVEE") {
+      isEeveeSelected = true;
+    } else {
+      userDeck.pointSideCards.push(cardDummy[cardDummy.length - 1]);
+    }
     cardDummy.splice(-1, 1);
   } else if (selectedBoardCardIndex.pokemonCardIndexs.length !== 0) {
     selectedBoardCardIndex.pokemonCardIndexs.forEach((cardIndex) => {
       if ("cardKey" in board.pokemonCards[cardIndex]) {
-        userDeck.pokemonSide[
-          (board.pokemonCards[cardIndex] as ICard).pokemonSide
-            .key as TPokemonExceptEevee
-        ].push(board.pokemonCards[cardIndex] as ICard);
+        if (
+          (board.pokemonCards[cardIndex] as ICard).pokemonSide.key === "EEVEE"
+        ) {
+          isEeveeSelected = true;
+        } else {
+          userDeck.pokemonSide[
+            (board.pokemonCards[cardIndex] as ICard).pokemonSide
+              .key as TPokemonExceptEevee
+          ].push(board.pokemonCards[cardIndex] as ICard);
+        }
       }
       board.pokemonCards[cardIndex] = {} as typeof BlankCard;
     });
   }
   selectedBoardCardIndex.pointCardIndex = null;
   selectedBoardCardIndex.pokemonCardIndexs = [];
+  return isEeveeSelected;
 };
 
 const calculatePoint = (userDeck: IDeck) => {
