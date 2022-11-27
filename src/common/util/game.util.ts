@@ -1,15 +1,40 @@
-import { ICard } from "../interface/card.interface";
+import { ICard, POKEMON_EXCEPT_EEVEE } from "../interface/card.interface";
 import { originCards } from "../../common/data/originCard.data";
 import { IBoard } from "../interface/board.interface";
+import { TPokemonExceptEevee } from "../interface/card.interface";
 
 export const GameUtil = {
   makeRawCards: (): ICard[] => {
     // 인원수당 랜덤으로 카드 받아와서 리턴해주는 형태로 변경
-    let temp: ICard[] = [];
-    for (let i = 0; i < 6; i++) {
-      temp = temp.concat(originCards);
-    }
-    return [...temp];
+    const USER_COUNT = 1;
+    const POKEMON_CARD_COUNT_PER_TYPE = 18;
+    const makeRandomCardIndexs = () => {
+      const SELECT_CARD_COUNT_PER_TYPE = USER_COUNT * 3;
+      const cardIndexs = new Set<number>();
+      while (true) {
+        const randomIndex: number = Math.floor(
+          Math.random() * POKEMON_CARD_COUNT_PER_TYPE
+        );
+        cardIndexs.add(randomIndex);
+        if (cardIndexs.size === SELECT_CARD_COUNT_PER_TYPE) {
+          break;
+        }
+      }
+      return cardIndexs;
+    };
+    const pokemonTypes: string[] = [...POKEMON_EXCEPT_EEVEE];
+
+    let makedRawCards: ICard[] = [];
+    pokemonTypes.forEach((pokemonType, index) => {
+      const makedRandomIndexs = makeRandomCardIndexs();
+      makedRandomIndexs.forEach((value: number) => {
+        makedRawCards.push(
+          originCards[value + POKEMON_CARD_COUNT_PER_TYPE * index]
+        );
+      });
+    });
+    console.log(makedRawCards);
+    return [...makedRawCards];
   },
   makeThreePointDummies: (rawCards: ICard[]): ICard[][] => {
     const _rawCards = [...rawCards];
@@ -45,8 +70,9 @@ export const GameUtil = {
       pointCardDummies: [...board.pointCardDummies.map((item) => [...item])],
       pokemonCards: [...board.pokemonCards],
     };
+    console.log(_board.pokemonCards);
     for (let i = 0; i < 6; i++) {
-      if (!_board.pokemonCards[i]) {
+      if (!_board.pokemonCards[i] || !("cardKey" in _board.pokemonCards[i])) {
         if (checkPointDummy(_board, i % 3)) {
           getCardFromDummy(_board, i);
         } else {
